@@ -6,48 +6,48 @@ export default function Jurusan() {
   const jurusan = [
     {
       nama: "Teknik Komputer dan Jaringan (TKJ)",
-      logo: "/images/jurusan/tkj-logo.png",
+      logo: "/images/logo/tkj.png",
       deskripsi:
         "Jurusan yang fokus pada administrasi jaringan, server, dan perangkat komputer.",
-      spesifikasi: "Laptop minimal i3 / Ryzen 3, RAM 4GB",
+      spesifikasi: "Laptop minimal i5 RAM 8GB SSD 512GB",
       seragam: "/images/jurusan/tkj-seragam.png",
     },
     {
       nama: "Rekayasa Perangkat Lunak (RPL)",
-      logo: "/images/jurusan/rpl-logo.png",
+      logo: "/images/logo/pplg.png",
       deskripsi:
         "Jurusan yang mempelajari pembuatan aplikasi, website, dan software modern.",
-      spesifikasi: "Laptop minimal i5 / Ryzen 5, RAM 8GB",
+      spesifikasi: "Laptop minimal i5 RAM 8GB SSD 512GB Minimal Gen 10 keatas",
       seragam: "/images/jurusan/rpl-seragam.png",
     },
     {
       nama: "Desain Komunikasi Visual (DKV)",
       logo: "/images/jurusan/dkv-logo.png",
       deskripsi: "Jurusan yang fokus pada desain grafis, ilustrasi, dan brand visual.",
-      spesifikasi: "Laptop i5 / Ryzen 5, RAM 8GB",
+      spesifikasi: "Laptop i7 RAM 16GB SSD 512GB Intel VGA",
       seragam: "/images/jurusan/dkv-seragam.png",
     },
     {
       nama: "Animasi",
-      logo: "/images/jurusan/animasi-logo.png",
+      logo: "/images/logo/animasi.png",
       deskripsi:
         "Jurusan yang mempelajari animasi 2D/3D, modeling, dan production pipeline.",
-      spesifikasi: "Laptop i7 / Ryzen 7, RAM 16GB",
+      spesifikasi: "Laptop i7 RAM 16GB SSD 512GB Intel VGA",
       seragam: "/images/jurusan/animasi-seragam.png",
     },
     {
       nama: "Produksi Siaran Program Televisi (PSPT)",
-      logo: "/images/jurusan/pspt-logo.png",
+      logo: "/images/logo/broad.png",
       deskripsi: "Jurusan produksi video, broadcasting, audio, dan perfilman.",
-      spesifikasi: "Laptop i5 / Ryzen 5, RAM 8GB",
+      spesifikasi: "Laptop i7 RAM 16GB SSD 512GB Intel VGA",
       seragam: "/images/jurusan/pspt-seragam.png",
     },
     {
       nama: "Teknik Elektronika Industri (TEI)",
-      logo: "/images/jurusan/tei-logo.png",
+      logo: "/images/logo/tei.png",
       deskripsi:
         "Jurusan di bidang otomasi industri, elektronika, dan sistem kontrol.",
-      spesifikasi: "Laptop i3 / Ryzen 3, RAM 4GB",
+      spesifikasi: "Laptop minimal i5 RAM 8GB SSD 512GB",
       seragam: "/images/jurusan/tei-seragam.png",
     },
   ];

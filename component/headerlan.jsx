@@ -19,7 +19,7 @@ export default function HeaderLand() {
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div>
             <div className="mb-6 ml-15">
-              <button className="px-4 py-2 bg-white/30 backdrop-blur-md text-white rounded-full text-sm shadow-md border border-white/20 hover:bg-white/40 transition">
+              <button className="px-4 py-2 bg-white/50 backdrop-blur-xs text-white rounded-full text-sm shadow-md border border-white/40 hover:bg-white/40 transition">
                 Layanan Sekolah
               </button>
             </div>

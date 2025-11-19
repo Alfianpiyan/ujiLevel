@@ -20,7 +20,7 @@ export default function NavbarLand() {
           </div>
         </div>
 
-        <div className="hidden md:flex items-center gap-10 text-sm font-light">
+        <div className="hidden md:flex items-center gap-10 text-sm font-semibold">
           <a href="#" className="hover:text-gray-300 transition">About</a>
           <a href="#" className="hover:text-gray-300 transition">Periode</a>
           <a href="#" className="hover:text-gray-300 transition">Fasilitas</a>
@@ -37,7 +37,7 @@ export default function NavbarLand() {
             hover:bg-blue-800
             transition
           ">
-            Daftar
+            Masuk
           </button>
         </div>
       </div>
