@@ -13,44 +13,31 @@ export async function registerUser(formData) {
     // Convert FormData → object
     const rawData = Object.fromEntries(formData);
 
-    // Validasi TEXT pakai Zod
+    // Validasi pakai Zod
     const validated = registerSchema.safeParse(rawData);
+    if (!validated.success) throw new Error("Validasi gagal");
 
-    if (!validated.success) {
-      console.error(validated.error.flatten().fieldErrors);
-      throw new Error("Validasi gagal");
-    }
-
-    // Ambil file bukti bayar
+    // Upload file bukti pembayaran
     const file = formData.get("bukti_pembayaran");
-    let savedPath = null;
+    if (!file || !file.name) throw new Error("Bukti pembayaran wajib diupload");
 
-    if (!file || !file.name) {
-      throw new Error("Bukti pembayaran wajib diupload");
-    }
-
-    // Upload file
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
     const uploadDir = path.join(process.cwd(), "public/uploads");
-
-    if (!existsSync(uploadDir)) {
-      await mkdir(uploadDir, { recursive: true });
-    }
+    if (!existsSync(uploadDir)) await mkdir(uploadDir, { recursive: true });
 
     const uploadPath = path.join(uploadDir, file.name);
     await writeFile(uploadPath, buffer);
-
-    savedPath = "/uploads/" + file.name;
+    const savedPath = "/uploads/" + file.name;
 
     // Hash password
     const hash = bcrypt.hashSync(validated.data.password);
 
-    // INSERT lengkap (sudah termasuk nama_pengirim)
-    await connection.execute(
-      `
-      INSERT INTO users (
+    // INSERT user
+    const conn = await connection(); // 🔹 HARUS AWAIT
+    await conn.execute(
+      `INSERT INTO users (
         nama,
         email,
         password,
@@ -68,8 +55,7 @@ export async function registerUser(formData) {
         bukti_pembayaran,
         nama_pengirim,
         nominal
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `,
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         validated.data.nama,
         validated.data.email,
@@ -87,9 +73,10 @@ export async function registerUser(formData) {
         validated.data.no_hp_casis,
         savedPath,
         validated.data.nama_pengirim,
-        validated.data.nominal // ← FIXED
+        validated.data.nominal
       ]
     );
+    await conn.end(); // 🔹 TUTUP koneksi
 
   } catch (err) {
     console.error("REGISTER ERROR:", err);
@@ -101,14 +88,5 @@ export async function registerUser(formData) {
 
 export async function loginUser(formData) {
   const rawData = Object.fromEntries(formData);
-
-  try {
-    await signIn("credentials", {
-      email: rawData.email,
-      password: rawData.password,
-      redirectTo: "/dashboard",
-    });
-  } catch (err) {
-    return { error: "Email atau password salah" };
-  }
+  // login dengan NextAuth dijalankan di API route
 }

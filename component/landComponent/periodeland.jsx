@@ -2,7 +2,7 @@
 
 export default function PeriodePendaftaran() {
   return (
-    <div className="w-full py-20 bg-gradient-to-b from-[#f4f7fb] to-[#e9eef6]">
+    <div className="w-full py-20 bg-white">
 
       <div className="max-w-4xl mx-auto text-center mb-16 px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-blue-900 tracking-tight mb-4">
