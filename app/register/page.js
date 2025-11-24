@@ -1,3 +1,5 @@
+"use client";
+
 import RegisterForm from "@/component/regisComponent/regisform";
 
 export default function RegisterPage() {
