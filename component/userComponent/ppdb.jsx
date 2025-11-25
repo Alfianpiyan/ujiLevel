@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 export default function PpdbForm() {
-  const [paymentMethod, setPaymentMethod] = useState("Lunas");
+  const [paymentMethod, setPaymentMethod] = useState("full"); // default: full (lunas)
   const [jurusanList, setJurusanList] = useState([]);
 
   useEffect(() => {
@@ -16,6 +16,9 @@ export default function PpdbForm() {
     e.preventDefault();
     const form = new FormData(e.target);
 
+    // VALUE DIKIRIM SUDAH SESUAI ENUM MYSQL:
+    // "full" atau "cicil"
+
     const res = await fetch("/api/ppdb", {
       method: "POST",
       body: form,
@@ -27,17 +30,23 @@ export default function PpdbForm() {
 
   return (
     <div className="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
+      <div className="bg-green-50 border border-green-300 text-green-800 p-4 rounded-lg mb-6">
+        <p className="font-semibold">
+          Gelombang 1 : Periode 01 Oktober 2025 — 28 Februari 2026
+        </p>
+      </div>
+
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-800 mb-2">Form Pendaftaran PPDB</h1>
         <p className="text-gray-600">Isi data dengan lengkap dan benar</p>
       </div>
 
       <form className="space-y-8" onSubmit={handleSubmit}>
-
-        {/* DATA DIRI */}
+        {/* =========================== */}
+        {/* ==== DATA DIRI SISWA ====== */}
+        {/* =========================== */}
         <section className="bg-blue-50 p-6 rounded-xl border border-blue-200">
-          <h2 className="text-xl font-semibold text-blue-800 mb-4 flex items-center gap-2">
-            <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+          <h2 className="text-xl font-semibold text-blue-800 mb-4">
             Data Diri Siswa
           </h2>
 
@@ -47,8 +56,7 @@ export default function PpdbForm() {
               <input
                 name="nama_lengkap"
                 type="text"
-                placeholder="Masukkan nama lengkap"
-                className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                className="w-full border border-gray-300 p-3 rounded-lg"
                 required
               />
             </div>
@@ -57,11 +65,9 @@ export default function PpdbForm() {
               <label className="block text-sm font-medium text-gray-700 mb-1">NISN</label>
               <input
                 name="nisn"
-                type="text"
-                placeholder="10 digit NISN"
                 maxLength={10}
                 pattern="[0-9]{10}"
-                className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                className="w-full border border-gray-300 p-3 rounded-lg"
                 required
               />
             </div>
@@ -71,193 +77,117 @@ export default function PpdbForm() {
               <input
                 name="tanggal_lahir"
                 type="date"
-                className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                className="w-full border border-gray-300 p-3 rounded-lg"
                 required
               />
             </div>
           </div>
         </section>
 
-        {/* PILIH JURUSAN */}
+        {/* ============================ */}
+        {/* ==== PILIH JURUSAN ========= */}
+        {/* ============================ */}
         <section className="bg-blue-50 p-6 rounded-xl border border-blue-200">
-          <h2 className="text-xl font-semibold text-blue-800 mb-4 flex items-center gap-2">
-            <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
-            Pilihan Jurusan
-          </h2>
+          <h2 className="text-xl font-semibold text-blue-800 mb-4">Pilihan Jurusan</h2>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Pilih Jurusan</label>
-            <select
-              name="jurusan_id"
-              className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
-              required
-            >
-              <option value="">-- Pilih Jurusan --</option>
+          <select name="jurusan_id" className="w-full border p-3 rounded-lg" required>
+            <option value="">-- Pilih Jurusan --</option>
 
-              {Array.isArray(jurusanList) &&
-                jurusanList.map((j) => (
-                  <option key={j.id} value={j.id}>
-                    {j.nama_jurusan}
-                  </option>
-                ))}
-            </select>
+            {Array.isArray(jurusanList) &&
+              jurusanList.map((j) => (
+                <option key={j.id} value={j.id}>
+                  {j.nama_jurusan}
+                </option>
+              ))}
+          </select>
+        </section>
+
+        {/* ============================ */}
+        {/* ==== UPLOAD BERKAS ========= */}
+        {/* ============================ */}
+        <section className="bg-blue-50 p-6 rounded-xl border border-blue-200">
+          <h2 className="text-xl font-semibold text-blue-800 mb-4">Upload Dokumen Wajib</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <label>
+              Ijazah / SKL
+              <input name="ijazah" type="file" required />
+            </label>
+
+            <label>
+              Akta
+              <input name="akta" type="file" required />
+            </label>
+
+            <label>
+              Kartu Keluarga
+              <input name="kk" type="file" required />
+            </label>
+
+            <label>
+              Pas Foto
+              <input name="foto" type="file" required />
+            </label>
           </div>
         </section>
 
-        {/* UPLOAD BERKAS */}
+        {/* ============================ */}
+        {/* ==== AKADEMIK ============== */}
+        {/* ============================ */}
         <section className="bg-blue-50 p-6 rounded-xl border border-blue-200">
-          <h2 className="text-xl font-semibold text-blue-800 mb-4 flex items-center gap-2">
-            <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
-            Upload Dokumen Wajib
-          </h2>
+          <h2 className="text-xl font-semibold text-blue-800 mb-4">Data Akademik</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">
-                Ijazah / SKL
-                <input 
-                  name="ijazah" 
-                  type="file" 
-                  className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                  required 
-                />
-              </label>
-
-              <label className="block text-sm font-medium text-gray-700">
-                Akta Kelahiran
-                <input 
-                  name="akta" 
-                  type="file" 
-                  className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                  required 
-                />
-              </label>
-            </div>
-
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">
-                Kartu Keluarga (KK)
-                <input 
-                  name="kk" 
-                  type="file" 
-                  className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                  required 
-                />
-              </label>
-
-              <label className="block text-sm font-medium text-gray-700">
-                Pas Foto
-                <input 
-                  name="foto" 
-                  type="file" 
-                  className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                  required 
-                />
-              </label>
-            </div>
-          </div>
-        </section>
-
-        {/* AKADEMIK */}
-        <section className="bg-blue-50 p-6 rounded-xl border border-blue-200">
-          <h2 className="text-xl font-semibold text-blue-800 mb-4 flex items-center gap-2">
-            <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
-            Data Akademik
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <label className="block text-sm font-medium text-gray-700">
+            <label>
               Buku Rapor
-              <input 
-                name="rapor" 
-                type="file" 
-                className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                required 
-              />
+              <input name="rapor" type="file" required />
             </label>
 
-            <label className="block text-sm font-medium text-gray-700">
-              Surat Keterangan Nilai Rapor
-              <input 
-                name="sk_nilai" 
-                type="file" 
-                className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                required 
-              />
+            <label>
+              SK Nilai
+              <input name="sk_nilai" type="file" required />
             </label>
           </div>
         </section>
 
-        {/* PEMBAYARAN */}
+        {/* =============================== */}
+        {/* ==== METODE PEMBAYARAN ========= */}
+        {/* =============================== */}
         <section className="bg-blue-50 p-6 rounded-xl border border-blue-200">
-          <h2 className="text-xl font-semibold text-blue-800 mb-4 flex items-center gap-2">
-            <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
-            Metode Pembayaran
-          </h2>
+          <h2 className="text-xl font-semibold text-blue-800 mb-4">Metode Pembayaran</h2>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Pilih Metode Pembayaran</label>
-            <select
-              name="metode_pembayaran"
-              className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"
-              value={paymentMethod}
-              onChange={(e) => setPaymentMethod(e.target.value)}
-              required
-            >
-              <option value="Lunas">Lunas</option>
-              <option value="Cicilan">Cicilan</option>
-            </select>
+          <select
+            name="metode_pembayaran"
+            className="w-full border p-3 rounded-lg bg-white"
+            value={paymentMethod}
+            onChange={(e) => setPaymentMethod(e.target.value)}
+            required
+          >
+            <option value="full">Lunas</option>
+            <option value="cicil">Cicilan</option>
+          </select>
 
-            {paymentMethod === "Cicilan" && (
-              <div className="mt-4 space-y-4">
-                <div className="bg-blue-100 border border-blue-300 rounded-lg p-4">
-                  <p className="text-sm text-blue-800 font-medium">
-                    <span className="font-bold">Note:</span> Minimal pembayaran awal Rp 3.000.000
-                  </p>
-                </div>
+          {/* CICILAN */}
+          {paymentMethod === "cicil" && (
+            <div className="mt-4">
+              <label>Bukti Pembayaran Awal (min 3 juta)</label>
+              <input name="bukti_pembayaran" type="file" required />
+            </div>
+          )}
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Bukti Pembayaran Awal
-                  </label>
-                  <input
-                    name="bukti_pembayaran"
-                    type="file"
-                    className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                    accept="image/*,.pdf"
-                    required
-                  />
-                  <p className="text-xs text-gray-500 mt-1">
-                    Upload bukti pembayaran awal minimal Rp 3.000.000 (format: JPG, PNG, atau PDF)
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {paymentMethod === "Lunas" && (
-              <div className="mt-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Bukti Pembayaran Lunas
-                </label>
-                <input
-                  name="bukti_pembayaran"
-                  type="file"
-                  className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                  accept="image/*,.pdf"
-                  required
-                />
-                <p className="text-xs text-gray-500 mt-1">
-                  Upload bukti pembayaran lunas (format: JPG, PNG, atau PDF)
-                </p>
-              </div>
-            )}
-          </div>
+          {/* FULL */}
+          {paymentMethod === "full" && (
+            <div className="mt-4">
+              <label>Bukti Pembayaran Lunas</label>
+              <input name="bukti_pembayaran" type="file" required />
+            </div>
+          )}
         </section>
 
         <div className="text-center pt-4">
           <button
             type="submit"
-            className="bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 shadow-lg"
+            className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700"
           >
             Daftar Sekarang
           </button>
