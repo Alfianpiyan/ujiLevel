@@ -30,15 +30,12 @@ export default function LoginPage() {
       setLoading(false);
       return;
     }
-
-    // 🔥 Ambil session setelah login
     const session = await fetch("/api/auth/session").then((res) =>
       res.json()
     );
 
     console.log("SESSION CLIENT:", session);
 
-    // 🔥 Redirect berdasarkan role
     if (session?.user?.role === "admin") {
       window.location.href = "/admin";
     } else if (session?.user?.role === "petugas") {
@@ -46,6 +43,8 @@ export default function LoginPage() {
     } else {
       window.location.href = "/user";
     }
+
+    // console.log("SESSION CLIENT:", session.user.role);
   };
 
   return (

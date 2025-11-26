@@ -3,44 +3,34 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import connection from "@/app/lib/db";
 
-// ===============================
-// GET USER BY EMAIL (FINAL FIXED)
-// ===============================
 async function getUserByEmail(email) {
   const conn = await connection();
 
-  const [rows] = await conn.query(
-    `
-      SELECT 
-        id AS id,
-        nama,
-        email,
-        password,
-        role
-      FROM users 
-      WHERE email = ?
-
-      UNION
-
-      SELECT 
-        id_petugas AS id,
-        nama,
-        email,
-        password,
-        role
-      FROM petugas
-      WHERE email = ?
-    `,
-    [email, email]
+  // Cek di tabel users dulu
+  const [user] = await conn.query(
+    `SELECT id AS id, nama, email, password, role FROM users WHERE email = ?`,
+    [email]
   );
+  if (user.length) {
+    await conn.end();
+    return user[0];
+  }
+
+  // Kalau tidak ditemukan, cek di tabel petugas
+  const [staff] = await conn.query(
+    `SELECT id_petugas AS id, nama, email, password, role FROM petugas WHERE email = ?`,
+    [email]
+  );
+  if (staff.length) {
+    await conn.end();
+    return staff[0];
+  }
 
   await conn.end();
-  return rows.length ? rows[0] : null;
+  return null;
 }
 
-// ==========================
-//        NEXTAUTH CONFIG
-// ==========================
+
 export const authOptions = {
   pages: {
     signIn: "/login",
@@ -81,6 +71,7 @@ export const authOptions = {
     }),
   ],
 
+
   // ======================================
   // JWT CALLBACK → simpan role ke token
   // ======================================
@@ -95,9 +86,6 @@ export const authOptions = {
       return token;
     },
 
-    // ======================================
-    // SESSION CALLBACK → token → session
-    // ======================================
     async session({ session, token }) {
       session.user.id = token.id;
       session.user.email = token.email;

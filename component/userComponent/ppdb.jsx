@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 
 export default function PpdbForm() {
-  const [paymentMethod, setPaymentMethod] = useState("full"); // default: full (lunas)
   const [jurusanList, setJurusanList] = useState([]);
 
   useEffect(() => {
@@ -15,9 +14,6 @@ export default function PpdbForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
-
-    // VALUE DIKIRIM SUDAH SESUAI ENUM MYSQL:
-    // "full" atau "cicil"
 
     const res = await fetch("/api/ppdb", {
       method: "POST",
@@ -42,9 +38,7 @@ export default function PpdbForm() {
       </div>
 
       <form className="space-y-8" onSubmit={handleSubmit}>
-        {/* =========================== */}
-        {/* ==== DATA DIRI SISWA ====== */}
-        {/* =========================== */}
+        {/* DATA DIRI */}
         <section className="bg-blue-50 p-6 rounded-xl border border-blue-200">
           <h2 className="text-xl font-semibold text-blue-800 mb-4">
             Data Diri Siswa
@@ -52,7 +46,9 @@ export default function PpdbForm() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Nama Lengkap
+              </label>
               <input
                 name="nama_lengkap"
                 type="text"
@@ -73,7 +69,9 @@ export default function PpdbForm() {
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Tanggal Lahir</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Tanggal Lahir
+              </label>
               <input
                 name="tanggal_lahir"
                 type="date"
@@ -84,14 +82,12 @@ export default function PpdbForm() {
           </div>
         </section>
 
-        {/* ============================ */}
-        {/* ==== PILIH JURUSAN ========= */}
-        {/* ============================ */}
+        {/* JURUSAN */}
         <section className="bg-blue-50 p-6 rounded-xl border border-blue-200">
           <h2 className="text-xl font-semibold text-blue-800 mb-4">Pilihan Jurusan</h2>
 
           <select name="jurusan_id" className="w-full border p-3 rounded-lg" required>
-            <option value="">-- Pilih Jurusan --</option>
+            <option value=""> Pilih Jurusan </option>
 
             {Array.isArray(jurusanList) &&
               jurusanList.map((j) => (
@@ -102,15 +98,13 @@ export default function PpdbForm() {
           </select>
         </section>
 
-        {/* ============================ */}
-        {/* ==== UPLOAD BERKAS ========= */}
-        {/* ============================ */}
+        {/* UPLOAD WAJIB */}
         <section className="bg-blue-50 p-6 rounded-xl border border-blue-200">
           <h2 className="text-xl font-semibold text-blue-800 mb-4">Upload Dokumen Wajib</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <label>
-              Ijazah / SKL
+              Ijazah 
               <input name="ijazah" type="file" required />
             </label>
 
@@ -131,9 +125,7 @@ export default function PpdbForm() {
           </div>
         </section>
 
-        {/* ============================ */}
-        {/* ==== AKADEMIK ============== */}
-        {/* ============================ */}
+        {/* AKADEMIK */}
         <section className="bg-blue-50 p-6 rounded-xl border border-blue-200">
           <h2 className="text-xl font-semibold text-blue-800 mb-4">Data Akademik</h2>
 
@@ -144,44 +136,20 @@ export default function PpdbForm() {
             </label>
 
             <label>
-              SK Nilai
-              <input name="sk_nilai" type="file" required />
+              Surat Keterangan Lulus
+              <input name="skl" type="file" required />
             </label>
           </div>
         </section>
 
-        {/* =============================== */}
-        {/* ==== METODE PEMBAYARAN ========= */}
-        {/* =============================== */}
+        {/* PEMBAYARAN FULL */}
         <section className="bg-blue-50 p-6 rounded-xl border border-blue-200">
-          <h2 className="text-xl font-semibold text-blue-800 mb-4">Metode Pembayaran</h2>
+          <h2 className="text-xl font-semibold text-blue-800 mb-4">Bukti Pembayaran</h2>
 
-          <select
-            name="metode_pembayaran"
-            className="w-full border p-3 rounded-lg bg-white"
-            value={paymentMethod}
-            onChange={(e) => setPaymentMethod(e.target.value)}
-            required
-          >
-            <option value="full">Lunas</option>
-            <option value="cicil">Cicilan</option>
-          </select>
-
-          {/* CICILAN */}
-          {paymentMethod === "cicil" && (
-            <div className="mt-4">
-              <label>Bukti Pembayaran Awal (min 3 juta)</label>
-              <input name="bukti_pembayaran" type="file" required />
-            </div>
-          )}
-
-          {/* FULL */}
-          {paymentMethod === "full" && (
-            <div className="mt-4">
-              <label>Bukti Pembayaran Lunas</label>
-              <input name="bukti_pembayaran" type="file" required />
-            </div>
-          )}
+          <label>
+            Upload Bukti Pembayaran
+            <input name="bukti_pembayaran" type="file" required />
+          </label>
         </section>
 
         <div className="text-center pt-4">

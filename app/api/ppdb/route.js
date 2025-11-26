@@ -14,13 +14,8 @@ export async function POST(req) {
     const nisn = formData.get("nisn");
     const tanggal_lahir = formData.get("tanggal_lahir");
     const jurusan_id = formData.get("jurusan_id");
-    const metode_pembayaran = formData.get("metode_pembayaran");
 
-    // ===============================
-    // 1) CEK SESSION
-    // ===============================
     const session = await getServerSession(authOptions);
-
     if (!session || !session.user) {
       return NextResponse.json(
         { message: "Harus login dulu" },
@@ -29,17 +24,9 @@ export async function POST(req) {
     }
 
     const user_id = session.user.id;
-
-    // ===============================
-    // 2) GEL0MBANG MANUAL
-    // ===============================
     const gelombang = 1;
 
-    // ===============================
-    // 3) SIMPAN FILE UPLOAD
-    // ===============================
-    const uploadDir = path.join(process.cwd(), "public/formulir");
-
+    const uploadDir = path.join(process.cwd(), "public/uploads");
     if (!existsSync(uploadDir)) {
       await mkdir(uploadDir, { recursive: true });
     }
@@ -56,7 +43,7 @@ export async function POST(req) {
 
       await writeFile(filePath, buffer);
 
-      return "/formulir/" + filename;
+      return "/uploads/" + filename;
     }
 
     const ijazah = await saveFile("ijazah");
@@ -64,35 +51,33 @@ export async function POST(req) {
     const kk = await saveFile("kk");
     const foto = await saveFile("foto");
     const rapor = await saveFile("rapor");
-    const sk_nilai = await saveFile("sk_nilai");
+    const skl = await saveFile("skl");
     const bukti_pembayaran = await saveFile("bukti_pembayaran");
 
-    // ===============================
-    // 4) GENERATE NOMOR PENDAFTARAN
-    // ===============================
-    const nomor_pendaftaran = "PPDB-" + Date.now();
-
-    // ===============================
-    // 5) DEFAULT PEMBAYARAN OTOMATIS
-    // ===============================
-    const total_biaya = 4750000;
-    const total_dibayar = 0;             // petugas yang verifikasi nanti
-    const sisa_pembayaran = total_biaya; // awalnya full
-
-    // status awal
     const status_pembayaran = "pending";
 
-    // ===============================
-    // 6) SIMPAN DATA PPDB
-    // ===============================
     const conn = await connection();
+
+    
+    // hitung jumlah pendaftar → buat nomor urut
+    const [countRows] = await conn.execute("SELECT COUNT(*) AS total FROM ppdb");
+    const idPendaftar = String(countRows[0].total + 1).padStart(3, "0");
+
+    // tahun ajaran otomatis
+    const year = new Date().getFullYear();
+    const short1 = String(year).slice(2);     
+    const short2 = String(year + 1).slice(2);
+    const tahunAjaran = short1 + short2;      
+
+    // nomor pendaftaran akhir
+    const nomor_pendaftaran = `PPD-${tahunAjaran}-${idPendaftar}`;
 
     await conn.execute(
       `INSERT INTO ppdb 
-      (nomor_pendaftaran, nama_lengkap, nisn, tanggal_lahir, jurusan_id, user_id, metode_pembayaran,
-       ijazah, akta, kk, foto, rapor, sk_nilai, gelombang, bukti_pembayaran,
-       total_biaya, total_dibayar, sisa_pembayaran, status_pembayaran)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      (nomor_pendaftaran, nama_lengkap, nisn, tanggal_lahir, jurusan_id, user_id,
+      ijazah, akta, kk, foto, rapor, skl, gelombang, bukti_pembayaran,
+      status_pembayaran, tanggal_upload)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())`,
       [
         nomor_pendaftaran,
         nama_lengkap,
@@ -100,21 +85,18 @@ export async function POST(req) {
         tanggal_lahir,
         jurusan_id,
         user_id,
-        metode_pembayaran,
         ijazah,
         akta,
         kk,
         foto,
         rapor,
-        sk_nilai,
+        skl,
         gelombang,
         bukti_pembayaran,
-        total_biaya,
-        total_dibayar,
-        sisa_pembayaran,
         status_pembayaran
       ]
     );
+
 
     await conn.end();
 
@@ -122,8 +104,6 @@ export async function POST(req) {
       status: true,
       message: "Pendaftaran berhasil!",
       nomor_pendaftaran,
-      metode_pembayaran,
-      gelombang,
       status_pembayaran,
     });
 
