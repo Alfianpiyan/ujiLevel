@@ -1,4 +1,23 @@
+"use client";
+import { useEffect, useState } from "react";
+
 export default function DataTable() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadData() {
+      const res = await fetch("/api/ppdb/pendaftar", { cache: "no-store" });
+      if (!res.ok) return;
+      const json = await res.json();
+      setData(json);
+      setLoading(false);
+    }
+    loadData();
+  }, []);
+
+  if (loading) return <p className="p-6">Loading...</p>;
+
   return (
     <div className="bg-white p-6 rounded-xl shadow mt-10">
       <h2 className="text-xl font-semibold mb-4">Data Pendaftar</h2>
@@ -8,32 +27,36 @@ export default function DataTable() {
           <tr className="bg-gray-100">
             <th className="p-3 border">Nama</th>
             <th className="p-3 border">NISN</th>
-            <th className="p-3 border">Asal Sekolah</th>
             <th className="p-3 border">Status</th>
-            <th className="p-3 border">Aksi</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr>
-            <td className="p-3 border">Budi Santoso</td>
-            <td className="p-3 border">1234567890</td>
-            <td className="p-3 border">SMP 5 Depok</td>
-            <td className="p-3 border text-green-600 font-bold">Terverifikasi</td>
-            <td className="p-3 border">
-              <button className="px-4 py-2 bg-blue-600 text-white rounded">Detail</button>
-            </td>
-          </tr>
+          {data.length === 0 && (
+            <tr>
+              <td colSpan={4} className="p-4 text-center">
+                Belum ada pendaftar
+              </td>
+            </tr>
+          )}
 
-          <tr>
-            <td className="p-3 border">Ani Lestari</td>
-            <td className="p-3 border">9876543210</td>
-            <td className="p-3 border">SMP 2 Bogor</td>
-            <td className="p-3 border text-yellow-600 font-bold">Pending</td>
-            <td className="p-3 border">
-              <button className="px-4 py-2 bg-blue-600 text-white rounded">Detail</button>
-            </td>
-          </tr>
+          {data.map((item) => (
+            <tr key={item.id}>
+              <td className="p-3 border">{item.nama_lengkap}</td>
+              <td className="p-3 border">{item.nisn}</td>
+              <td
+                className={`p-3 border font-semibold ${
+                  item.status_pembayaran === "verifikasi"
+                    ? "text-green-600"
+                    : item.status_pembayaran === "tolak"
+                    ? "text-red-600"
+                    : "text-yellow-600"
+                }`}
+              >
+                {item.status_pembayaran || "Pending"}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

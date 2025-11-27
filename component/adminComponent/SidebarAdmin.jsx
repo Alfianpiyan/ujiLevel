@@ -1,5 +1,7 @@
 "use client";
 
+import LogoutButton from "../logoutComponent/logoutbutton";
+
 export default function AdminSidebar() {
   return (
     <aside className="w-64 bg-white shadow-md p-6 min-h-screen">
@@ -22,6 +24,7 @@ export default function AdminSidebar() {
           Profil
         </a>
       </nav>
+      <LogoutButton />
     </aside>
   );
 }

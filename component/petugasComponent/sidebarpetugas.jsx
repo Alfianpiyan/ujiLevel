@@ -11,6 +11,7 @@ import {
   Shield,
 } from "lucide-react";
 import Image from "next/image";
+import LogoutButton from "../logoutComponent/logoutbutton";
 
 export default function SidebarPetugas() {
   const path = usePathname();
@@ -80,17 +81,7 @@ export default function SidebarPetugas() {
           );
         })}
       </nav>
-      
-      {/* Footer */}
-      {/* <div className="mt-8 pt-4 border-t border-gray-100">
-        <div className="flex items-center space-x-2 mb-2">
-          <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center">
-            <Shield className="w-3 h-3 text-blue-600" />
-          </div>
-          <span className="text-xs text-gray-600 font-medium">Petugas Panel</span>
-        </div>
-        <p className="text-xs text-gray-400">© 2025 PPDB System</p>
-      </div> */}
+      <LogoutButton />
     </div>
   );
 }
