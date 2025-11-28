@@ -10,18 +10,21 @@ export async function GET() {
         nomor_pendaftaran,
         nama_lengkap,
         bukti_pembayaran,
-        status_pembayaran,
+        ijazah,
+        kk,
+        akta,
+        rapor,
+        foto,
+        skl,
+        status_verifikasi,
         tanggal_upload
       FROM ppdb
       ORDER BY id DESC
     `);
 
-    // pastikan array
     return Response.json(Array.isArray(rows) ? rows : []);
   } catch (err) {
     console.error("API ERROR:", err);
-
-    // tetap return array biar tidak error di UI
     return Response.json([], { status: 500 });
   }
 }

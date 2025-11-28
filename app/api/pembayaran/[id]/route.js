@@ -2,16 +2,21 @@ import connection from "@/app/lib/db";
 
 export async function PUT(req, context) {
   try {
-    const params = await context.params;
-    const { id } = params;
-    
-    const { status } = await req.json();
+    const { id } = await context.params;
+    const { status_verifikasi } = await req.json();
+
+    console.log("ID:", id)
+    console.log("STATUS:", status_verifikasi)
+
+    const allowed = ["pending", "verifikasi", "tolak"];
+    if (!allowed.includes(status_verifikasi)) {
+      return Response.json({ message: "Status tidak valid!" }, { status: 400 });
+    }
 
     const conn = await connection();
-
     await conn.execute(
-      `UPDATE ppdb SET status_pembayaran = ? WHERE id = ?`,
-      [status, id]
+      `UPDATE ppdb SET status_verifikasi = ? WHERE id = ?`,
+      [status_verifikasi, id]
     );
 
     return Response.json({ message: "Status berhasil diupdate" });
