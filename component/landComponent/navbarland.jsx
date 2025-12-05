@@ -2,48 +2,216 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
 
-export default function NavbarLand() {
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const navLinks = [
+    { label: "Beranda", href: "#beranda" },
+    { label: "PPDB", href: "#ppdb" },
+    { label: "Contact Us", href: "#contact" },
+  ];
+
   return (
-    <div className="absolute top-0 left-0 w-full z-30">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between text-white">
-        <div className="ml-16 flex items-center gap-3">
-          <Image
-            src="/images/logo.png"
-            width={48}
-            height={48}
-            alt="Logo Sekolah"
-            className="object-contain"
-          />
-          <div className="text-[13px] leading-tight">
-            <div className="font-semibold tracking-wide">Sistem PPDB</div>
-            <div className="opacity-90">SMK Taruna Bhakti</div>
-          </div>
-        </div>
-
-        <div className="hidden md:flex items-center gap-10 text-sm font-semibold">
-          <a href="#" className="hover:text-gray-300 transition">About</a>
-          <a href="#" className="hover:text-gray-300 transition">Periode</a>
-          <a href="#" className="hover:text-gray-300 transition">Fasilitas</a>
-          <a href="#" className="hover:text-gray-300 transition">Jurusan</a>
-          <a href="#" className="hover:text-gray-300 transition">Contact</a>
-        </div>
-
-        <div className="flex items-center gap-4 mr-26">
-
-          <Link href="/login">
-            <button className="
-              px-5 py-2 
-              bg-blue-900/90
-              rounded-full 
-              hover:bg-blue-800
-              transition
-            ">
-              Masuk
-            </button>
+    <>
+      {/* Navbar Container */}
+      <nav className={`
+        fixed top-4 left-1/2 -translate-x-1/2 z-50
+        w-[90%] max-w-6xl
+        rounded-full
+        border border-gray-200
+        shadow-lg
+        transition-all duration-300
+        ${scrolled ? "bg-white/90 backdrop-blur-xs" : "bg-white"}
+        ${isMenuOpen ? 'rounded-2xl md:rounded-full' : 'rounded-full'}
+      `}>
+        <div className="flex items-center justify-between px-6 py-3">
+          
+          {/* Logo Section */}
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="p-1.5 rounded-full">
+              <Image
+                src="/images/ppdb/LogoTb.png"
+                alt="Logo TB"
+                width={50}
+                height={50}
+                className="object-contain"
+                priority
+              />
+            </div>
+            <div className="flex flex-col">
+              <p className="text-lg font-semibold text-[#15518a] tracking-tight leading-tight">
+                SMK
+              </p>
+              <p className="text-lg font-semibold text-[#15518a] tracking-tight leading-tight">
+                Taruna Bhakti
+              </p>
+            </div>
           </Link>
+
+          {/* Desktop Navigation Links */}
+          <div className="hidden md:flex items-center gap-6">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="
+                  font-semibold text-sm 
+                  px-4 py-2 
+                  rounded-full 
+                  text-[#15518a] 
+                  hover:text-[#166dbf] 
+                  hover:bg-[#166dbf]/10 
+                  transition-all duration-300
+                "
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Desktop Buttons */}
+          <div className="hidden md:flex items-center gap-3">
+            <Link
+              href="/masuk"
+              className="
+                px-8 py-2 
+                text-sm font-medium 
+                rounded-full 
+                border border-[#4EA3D8] 
+                bg-[#15518a] 
+                text-white 
+                hover:bg-white 
+                hover:text-[#15518a] 
+                transition-all duration-400
+              "
+            >
+              Masuk
+            </Link>
+            <Link
+              href="/daftar"
+              className="
+                px-8 py-2 
+                text-sm font-medium 
+                rounded-full 
+                border border-[#4EA3D8] 
+                bg-[#15518a] 
+                text-white 
+                hover:bg-white 
+                hover:text-[#15518a] 
+                transition-all duration-400
+              "
+            >
+              Daftar
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 rounded-full hover:bg-gray-100 transition"
+            aria-label={isMenuOpen ? "Tutup menu" : "Buka menu"}
+          >
+            {isMenuOpen ? (
+              <X className="w-6 h-6 text-[#047857]" />
+            ) : (
+              <Menu className="w-6 h-6 text-[#047857]" />
+            )}
+          </button>
         </div>
-      </div>
-    </div>
+
+        {/* Mobile Menu Panel */}
+        {isMenuOpen && (
+          <div className="md:hidden border-t border-gray-200 px-6 py-6">
+            <div className="flex flex-col space-y-4">
+              {navLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="
+                    text-[#15518a] 
+                    font-medium 
+                    text-sm 
+                    px-4 py-3 
+                    rounded-lg 
+                    hover:bg-[#15518a]/10 
+                    transition-all duration-200
+                  "
+                >
+                  {link.label}
+                </a>
+              ))}
+              
+              {/* Mobile Buttons */}
+              <div className="flex flex-col gap-3 pt-4 border-t border-gray-200">
+                <Link
+                  href="/masuk"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="
+                    w-full text-center
+                    px-6 py-3 
+                    text-sm font-medium 
+                    rounded-full 
+                    border border-[#15518a] 
+                    bg-white
+                    text-[#15518a] 
+                    hover:bg-[#15518a] 
+                    hover:text-white 
+                    transition-all duration-300
+                  "
+                >
+                  Masuk
+                </Link>
+                <Link
+                  href="/daftar"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="
+                    w-full text-center
+                    px-6 py-3 
+                    text-sm font-medium 
+                    rounded-full 
+                    border border-[#4EA3D8] 
+                    bg-[#15518a] 
+                    text-white 
+                    hover:bg-white 
+                    hover:text-[#15518a] 
+                    transition-all duration-300
+                  "
+                >
+                  Daftar
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+      </nav>
+
+      {/* Spacer for fixed navbar */}
+      <div className="h-24 md:h-20" />
+    </>
   );
 }

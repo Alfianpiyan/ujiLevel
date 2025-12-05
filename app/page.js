@@ -17,7 +17,6 @@ export default function Home() {
       <HeaderLand />
       <PeriodePendaftaran />
       <PanduanPPDB />
-      <Fasilitas />
       <Jurusan />
       <FAQ />
       <Partners />

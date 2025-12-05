@@ -1,158 +1,143 @@
 "use client";
 
-import { useState } from "react";
+import Image from "next/image";
+import { useEffect } from "react";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 export default function Jurusan() {
-  const jurusan = [
+  
+  useEffect(() => {
+    Aos.init({
+      duration: 900,
+      easing: "ease-in-out",
+      once: true,
+    });
+  }, []);
+
+  const dataJurusan = [
     {
-      nama: "Teknik Komputer dan Jaringan (TKJ)",
-      logo: "/images/logo/tkj.png",
+      singkatan: "PPLG",
+      nama: "Pengembangan Perangkat Lunak & Gim",
+      logo: "/images/logoJurusan/PPLG.jpg",
       deskripsi:
-        "Jurusan yang fokus pada administrasi jaringan, server, dan perangkat komputer.",
-      spesifikasi: "Laptop minimal i5 RAM 8GB SSD 512GB",
+        "Fokus pada proses merancang, membangun, mengembangkan, dan memelihara aplikasi (mobile/web) serta game berbasis teknologi terkini.",
+      warna: "bg-blue-600",
     },
     {
-      nama: "Rekayasa Perangkat Lunak (RPL)",
-      logo: "/images/logo/pplg.png",
+      singkatan: "TKJ",
+      nama: "Teknik Komputer & Jaringan",
+      logo: "/images/logoJurusan/lgtkj.jpg",
       deskripsi:
-        "Jurusan yang mempelajari pembuatan aplikasi, website, dan software modern.",
-      spesifikasi: "Laptop minimal i5 RAM 8GB SSD 512GB Minimal Gen 10 keatas",
+        "Membekali siswa dengan kemampuan merakit, mengkonfigurasi, mengelola jaringan server, hingga memperbaiki perangkat keras komputer.",
+      warna: "bg-teal-600",
     },
     {
+      singkatan: "PSPT",
+      nama: "Produksi & Siaran Televisi",
+      logo: "/images/logoJurusan/lgbc.jpg",
+      deskripsi:
+        "Mencetak talenta dalam penyiaran, produksi audiovisual, sinematografi, dan manajemen konten media kreatif profesional.",
+      warna: "bg-red-600",
+    },
+    {
+      singkatan: "TE",
+      nama: "Teknik Elektro Industri",
+      logo: "/images/logoJurusan/TE.jpg",
+      deskripsi:
+        "Mempelajari teknik instalasi listrik, kelistrikan modern, otomasi industri, dan troubleshooting sistem elektrik.",
+      warna: "bg-orange-600",
+    },
+    {
+      singkatan: "DKV", 
       nama: "Desain Komunikasi Visual (DKV)",
-      logo: "/images/logo/dkv.jpg",
-      deskripsi: "Jurusan yang fokus pada desain grafis, ilustrasi, dan brand visual.",
-      spesifikasi: "Laptop i7 RAM 16GB SSD 512GB Intel VGA",
-    },
-    {
-      nama: "Animasi",
-      logo: "/images/logo/animasi.png",
+      logo: "/images/logoJurusan/DKV.png",
       deskripsi:
-        "Jurusan yang mempelajari animasi 2D/3D, modeling, dan production pipeline.",
-      spesifikasi: "Laptop i7 RAM 16GB SSD 512GB Intel VGA",
+        "Menggabungkan visual, audio, animasi, hingga video untuk menciptakan karya desain dan komunikasi digital yang kreatif dan berdampak.",
+      warna: "bg-purple-600",
     },
     {
-      nama: "Produksi Siaran Program Televisi (PSPT)",
-      logo: "/images/logo/broad.png",
-      deskripsi: "Jurusan produksi video, broadcasting, audio, dan perfilman.",
-      spesifikasi: "Laptop i7 RAM 16GB SSD 512GB Intel VGA",
-    },
-    {
-      nama: "Teknik Elektronika Industri (TEI)",
-      logo: "/images/logo/tei.png",
+      singkatan: "ANIMASI",
+      nama: "Animasi Kreatif",
+      logo: "/images/logoJurusan/ANIMASI2.jpg", 
       deskripsi:
-        "Jurusan di bidang otomasi industri, elektronika, dan sistem kontrol.",
-      spesifikasi: "Laptop minimal i5 RAM 8GB SSD 512GB",
+        "Mencetak animator handal yang menguasai desain karakter, storyboard, modeling 3D, serta teknik pembuatan film animasi 2D dan 3D.",
+      warna: "bg-pink-600",
     },
   ];
 
-  const [index, setIndex] = useState(0);
-
-  const next = () => {
-    setIndex((prev) => (prev + 1) % jurusan.length);
-  };
-
-  const prev = () => {
-    setIndex((prev) => (prev - 1 + jurusan.length) % jurusan.length);
-  };
-
   return (
-    <div className="relative w-full py-12 overflow-hidden bg-white">
-      <div className="text-center mb-10 px-5">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
-          Program Jurusan
-        </h2>
-        <p className="text-gray-600 max-w-2xl mx-auto">
-          Pilih jurusan yang sesuai dengan minat dan bakat Anda
-        </p>
-      </div>
-
-      <div
-        className="flex transition-transform duration-500 ease-out"
-        style={{ transform: `translateX(-${index * 100}%)` }}
-      >
-        {jurusan.map((j, i) => (
-          <div key={i} className="w-full shrink-0 px-5 md:px-20">
-            <div className="bg-white rounded-xl p-8 flex flex-col md:flex-row gap-8 items-center justify-center shadow-lg border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="flex justify-center w-full md:w-auto">
-                <div className="w-32 h-32 bg-blue-50 rounded-xl flex items-center justify-center p-4 border border-blue-100">
-                  <img
-                    src={j.logo}
-                    alt={j.nama}
-                    className="w-full h-full object-contain"
+    <section className="py-16 sm:py-24 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          data-aos="fade-up"
+          className="text-center max-w-4xl mx-auto mb-16"
+        >
+          <h2 className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
+            Pilih Masa Depanmu: Konsentrasi Keahlian Unggulan
+          </h2>
+          <p className="mt-4 text-gray-600 text-xl">
+            Kami menawarkan 6 program keahlian yang relevan dengan revolusi industri 4.0, didukung kurikulum berbasis industri dan fasilitas mutakhir.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6"> 
+          {dataJurusan.map((item, index) => (
+            <div
+              key={index}
+              data-aos="fade-up"
+              data-aos-delay={index * 120}
+              className="
+                group relative rounded-xl overflow-hidden h-full min-h-[350px]
+                shadow-xl bg-white border border-gray-200
+                transition-all duration-500 hover:shadow-2xl hover:scale-[1.02]
+              "
+            >
+              
+              <div className="p-6 text-center h-full">
+                <div className="relative h-24 w-full flex items-center justify-center mb-4">
+                  <Image
+                    src={item.logo}
+                    alt={item.singkatan}
+                    width={100}
+                    height={100}
+                    className="
+                      object-contain transition-all duration-500
+                      group-hover:scale-125 group-hover:opacity-10
+                    "
                   />
                 </div>
+                
+                <span className={`text-xs font-bold uppercase rounded-full px-3 py-1 ${item.warna} text-white`}>
+                  {item.singkatan}
+                </span>
+                <h3 className="text-xl font-extrabold mt-3 text-gray-900 leading-snug">
+                  {item.nama}
+                </h3>
               </div>
-
-              <div className="flex-1 text-center md:text-left space-y-4">
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-800">
-                    {j.nama}
-                  </h3>
-                  <div className="w-12 h-1 bg-blue-500 rounded-full mt-2 mx-auto md:mx-0"></div>
-                </div>
-                
-                <p className="text-gray-600 leading-relaxed">
-                  {j.deskripsi}
-                </p>
-                
-                <div className="flex items-center justify-center md:justify-start gap-2 bg-gray-50 rounded-lg px-4 py-2">
-                  <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <p className="font-medium text-gray-700 text-sm">{j.spesifikasi}</p>
+            
+              <div
+                className={`
+                  absolute inset-0 w-full h-full p-6
+                  flex flex-col items-start justify-end
+                  text-white transition-all duration-500 opacity-0
+                  group-hover:opacity-100 group-hover:bg-black/70
+                  group-hover:backdrop-blur-sm
+                `}
+              >
+                <div className="space-y-3">
+                    <p className={`text-base font-semibold border-l-4 pl-3 border-yellow-400`}>
+                        {item.singkatan}
+                    </p>
+                    <p className="text-sm leading-relaxed">
+                        {item.deskripsi}
+                    </p>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-
-      <button
-        onClick={prev}
-        className="absolute top-1/2 left-4 -translate-y-1/2 bg-white hover:bg-gray-50 border border-gray-300 transition-colors p-3 rounded-full shadow-sm"
-      >
-        <svg className="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24">
-          <path
-            d="M15 19l-7-7 7-7"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </button>
-
-      <button
-        onClick={next}
-        className="absolute top-1/2 right-4 -translate-y-1/2 bg-white hover:bg-gray-50 border border-gray-300 transition-colors p-3 rounded-full shadow-sm"
-      >
-        <svg className="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24">
-          <path
-            d="M9 5l7 7-7 7"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </button>
-
-      <div className="flex justify-center mt-8 gap-2">
-        {jurusan.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setIndex(i)}
-            className={`w-2 h-2 rounded-full transition-colors ${
-              index === i ? "bg-blue-500" : "bg-gray-300 hover:bg-gray-400"
-            }`}
-          ></button>
-        ))}
-      </div>
-
-      <div className="text-center mt-4 text-gray-500 text-sm">
-        {index + 1} / {jurusan.length}
-      </div>
-    </div>
+    </section>
   );
 }

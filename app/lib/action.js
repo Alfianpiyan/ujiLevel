@@ -89,17 +89,17 @@ export async function getDashboardStats() {
     
     // Total Pendaftar - semua data di tabel ppdb
     const [totalPendaftar] = await conn.execute(
-      'SELECT COUNT(*) as count FROM ppdb'
+      'SELECT COUNT(*) as count FROM pendaftaran'
     );
 
     // Lulus Verifikasi - berdasarkan status_pembayaran = 'verifikasi'
     const [lulusVerifikasi] = await conn.execute(
-      `SELECT COUNT(*) as count FROM ppdb WHERE status_pembayaran = 'verifikasi'`
+      `SELECT COUNT(*) as count FROM pendaftaran WHERE status_pembayaran = 'verifikasi'`
     );
 
     // Belum Diverifikasi - status_pembayaran = 'pending'
     const [belumDiverifikasi] = await conn.execute(
-      `SELECT COUNT(*) as count FROM ppdb WHERE status_pembayaran = 'pending'`
+      `SELECT COUNT(*) as count FROM pendaftaran WHERE status_pembayaran = 'pending'`
     );
 
     return {

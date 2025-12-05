@@ -36,12 +36,12 @@ export default function FAQ() {
       answer: "Biaya pendidikan bervariasi tergantung gelombang pendaftaran dan jurusan yang dipilih. Silakan lihat bagian biaya pendidikan di website untuk informasi lengkap mengenai rincian biaya."
     },
     {
-      question: "Apakah tersedia beasiswa untuk siswa berprestasi?",
-      answer: "Ya, SMK Taruna Bhakti menyediakan program beasiswa untuk siswa berprestasi baik akademik maupun non-akademik. Informasi lengkap dapat ditanyakan langsung ke bagian administrasi."
+      question: "Bayar pendaftaran bisa nyicil nggak?",
+      answer: "Ya, bisa. Kami menyediakan opsi pembayaran bertahap (cicilan) untuk meringankan biaya pendaftaran awal, silakan hubungi kontak PPDB."
     },
     {
-      question: "Bagaimana sistem pembayaran biaya pendidikan?",
-      answer: "Pembayaran dapat dilakukan secara tunai di sekolah atau transfer ke rekening resmi sekolah. Sistem pembayaran dapat dicicil sesuai dengan ketentuan yang berlaku di masing-masing gelombang pendaftaran."
+      question:  "Apakah ada beasiswa di SMK Taruna Bhakti?", 
+      answer: "Kami menyediakan program beasiswa prestasi akademik dan non-akademik, serta beasiswa dari pihak industri atau pemerintah. Detail dapat dilihat di laman resmi PPDB."
     },
     {
       question: "Apakah lulusan SMK Taruna Bhakti sudah terserap di dunia kerja?",

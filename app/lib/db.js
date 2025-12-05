@@ -5,7 +5,7 @@ export default async function connection() {
     host: "localhost",
     user: "root",
     password: "",
-    database: "db_ppdb",
+    database: "db_ujian",
   });
 
   return conn;

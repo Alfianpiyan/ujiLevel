@@ -1,63 +1,110 @@
 "use client";
 
 import Image from "next/image";
+import { Clock, Calendar } from "lucide-react";
+import { useEffect } from "react";
 import Link from "next/link";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
-export default function HeaderLand() {
+export default function Hero() {
+  useEffect(() => {
+    AOS.init({
+      duration: 900,
+      easing: "ease-in-out",
+      once: true,
+    });
+  }, []);
+
   return (
-    <div className="relative w-full min-h-screen overflow-hidden">
-      <Image
-        src="/images/background.jpg"
-        alt="Gedung Sekolah"
-        fill
-        className="object-cover brightness-85"
-        priority
-      />
+    <section className="bg-gradient-to-b from-white to-slate-50 overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 md:px-10 lg:px-20 py-10 md:py-28 grid md:grid-cols-2 items-center gap-14">
 
-      {/* overlay */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-16 text-white">
+        {/* LEFT CONTENT */}
+        <div className="space-y-6">
+          <h1
+            data-aos="fade-up"
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight tracking-tight"
+          >
+            Pendidikan <span className="text-[#15518a]">Terbaik</span> untuk Masa Depan{" "}
+            <span className="text-[#15518a]">Gemilang</span>
+          </h1>
 
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <div className="mb-6 ml-15">
-              <button className="px-4 py-2 bg-white/35 backdrop-blur-xs text-white rounded-full text-sm shadow-md border border-white/40 hover:bg-white/40 transition">
-                Layanan Sekolah
-              </button>
-            </div>
+          <p
+            data-aos="fade-up"
+            className="text-gray-700 text-base md:text-lg leading-relaxed max-w-xl"
+          >
+            SMK Taruna Bhakti membuka pendaftaran peserta didik baru dengan visi
+            mencetak lulusan berkarakter yang unggul di bidang teknologi dan industri modern.
+          </p>
 
-            <h1 className="text-3xl ml-15 md:text-4xl font-bold leading-tight max-w-xl">
-              Penerimaan Peserta Didik Baru SMK Taruna Bhakti TP 2025/2026
-            </h1>
-
-            <p className="mt-4 ml-15 text-lg text-white/90 max-w-xl">
-              Pembelajaran praktik, fasilitas lengkap, dan dukungan dunia industri untuk mencetak lulusan yang terampil, percaya diri, dan siap kerja maupun kuliah.
-            </p>
-
-            <Link href="/register">
-              <button className="mt-8 ml-15 px-8 py-3 bg-white text-blue-900 font-medium rounded-full shadow-md hover:bg-gray-100 transition">
-                Daftar Sekarang
-              </button>
+          <div className="hidden md:flex gap-3">
+            <Link
+              href="/Daftar"
+              className="px-15 py-3 text-xl font-medium rounded-full border bg-[#15518a] border-[#4EA3D8] text-[#ffff] hover:bg-[#ffff] hover:text-[#15518a] transition-all duration-400"
+            >
+              Daftar
             </Link>
           </div>
+        </div>
 
-          <div className=" ml-22 flex flex-col gap-6 md:max-w-sm">
+        {/* RIGHT IMAGE + CARDS (KEPALA SEKOLAH) */}
+        <div
+          data-aos="fade-left"
+          className="relative w-full max-w-[600px] mx-auto h-[500px] flex items-center justify-center"
+        >
+          {/* IMAGE */}
+          <Image
+            src="/images/ppdb/gedungTb.jpg"
+            alt="Gedung Sekolah"
+            fill
+            className="object-cover rounded-4xl drop-shadow-xl hover:scale-[1.04] transition-all duration-700"
+            priority
+          />
 
-            <div className="bg-white/35 backdrop-blur-xs text-white p-6 rounded-2xl shadow-lg border border-white/40">
-              <h3 className="font-semibold text-lg">Gelombang 1</h3>
-              <p className="mt-1 text-sm">
-                01 Oktober 2025 - 28 Februari 2026
-              </p>
+          {/* CARDS ON TOP OF IMAGE */}
+          <div className="absolute inset-0 flex flex-row items-center justify-center gap-4 px-6">
+
+            {/* CARD 1 */}
+            <div
+              data-aos="fade-up"
+              className="group flex items-start gap-3 rounded-xl border border-[#4A88C7]/40 bg-white/90 backdrop-blur-sm
+              px-5 py-4 shadow-md hover:shadow-lg hover:border-[#4A88C7] hover:-translate-y-[2px] transition-all cursor-pointer w-[85%] max-w-[300px] duration-700"
+            >
+              <div className="min-w-[42px] h-[42px] text-[#15518a] flex justify-center items-center rounded-md bg-[#173e6720]">
+                <Clock />
+              </div>
+              <div>
+                <p className="font-semibold text-gray-900 text-sm md:text-[15px]">Gelombang Satu</p>
+                <p className="text-xs text-gray-600">17 Okt 2025 - 6 Jan 2026</p>
+                <p className="text-xs text-gray-800 font-medium">
+                  Biaya: <span className="font-semibold">Rp 4.300.000</span>
+                </p>
+              </div>
             </div>
 
-            <div className="bg-white/35 backdrop-blur-xs text-white p-6 rounded-2xl shadow-lg border border-white/40">
-              <h3 className="font-semibold text-lg">Gelombang 2</h3>
-              <p className="mt-1 text-sm">
-                01 Maret – 09 Juli 2026
-              </p>
+            {/* CARD 2 */}
+            <div
+              data-aos="fade-up"
+              data-aos-delay="150"
+              className="group flex items-start gap-3 rounded-xl border border-gray-300 bg-white/90 backdrop-blur-sm
+              px-5 py-4 shadow-md hover:shadow-lg hover:border-gray-400 hover:-translate-y-[2px] transition-all cursor-pointer w-[85%] max-w-[300px] duration-700"
+            >
+              <div className="min-w-[42px] h-[42px] text-[#15518a] flex justify-center items-center rounded-md bg-gray-100">
+                <Calendar size={20} />
+              </div>
+              <div>
+                <p className="font-semibold text-gray-900 text-sm md:text-[15px]">Gelombang Dua</p>
+                <p className="text-xs text-gray-600">12 Jan 2026 - 16 Jul 2026</p>
+                <p className="text-xs text-gray-800 font-medium">
+                  Biaya: <span className="font-semibold">Rp 4.500.000</span>
+                </p>
+              </div>
             </div>
+
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

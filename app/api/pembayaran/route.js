@@ -18,7 +18,7 @@ export async function GET() {
         skl,
         status_verifikasi,
         tanggal_upload
-      FROM ppdb
+      FROM pendaftaran
       ORDER BY id DESC
     `);
 
