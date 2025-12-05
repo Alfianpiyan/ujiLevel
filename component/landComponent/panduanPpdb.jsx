@@ -8,70 +8,70 @@ export default function PanduanPPDB() {
       title: "1. Pembayaran Formulir",
       description: "Bayar biaya formulir Rp250.000 ke rekening resmi sekolah",
       icon: DocumentTextIcon,
-      color: "bg-blue-500",
+      color: "bg-[#15518a]",
       duration: "5 menit"
     },
     {
       title: "2. Klik Tombol Daftar",
       description: "Tekan tombol 'Daftar' untuk memulai pendaftaran online",
       icon: UserPlusIcon,
-      color: "bg-purple-500",
+      color: "bg-[#1e3a8a]",
       duration: "2 menit"
     },
     {
       title: "3. Isi Formulir Awal",
       description: "Lengkapi data diri, NISN, alamat, dan informasi orang tua",
       icon: DocumentTextIcon,
-      color: "bg-green-500",
+      color: "bg-[#15518a]",
       duration: "10-15 menit"
     },
     {
       title: "4. Upload Bukti Bayar",
       description: "Unggah bukti transfer untuk pembuatan akun",
       icon: CloudArrowUpIcon,
-      color: "bg-yellow-500",
+      color: "bg-[#1e3a8a]",
       duration: "3 menit"
     },
     {
       title: "5. Buat Akun",
       description: "Sistem akan membuat akun dengan email & password Anda",
       icon: UserPlusIcon,
-      color: "bg-pink-500",
+      color: "bg-[#15518a]",
       duration: "Otomatis"
     },
     {
       title: "6. Login ke Sistem",
       description: "Masuk ke website dengan akun yang telah dibuat",
       icon: ArrowRightIcon,
-      color: "bg-indigo-500",
+      color: "bg-[#1e3a8a]",
       duration: "1 menit"
     },
     {
       title: "7. Menu Daftar Ulang",
       description: "Buka menu Daftar Ulang untuk tahap selanjutnya",
       icon: DocumentTextIcon,
-      color: "bg-teal-500",
+      color: "bg-[#15518a]",
       duration: "2 menit"
     },
     {
       title: "8. Upload Berkas",
       description: "Unggah KK, Akta, Ijazah, dan bukti bayar uang pangkal",
       icon: CloudArrowUpIcon,
-      color: "bg-orange-500",
+      color: "bg-[#1e3a8a]",
       duration: "5-10 menit"
     },
     {
       title: "9. Verifikasi",
       description: "Tunggu petugas memeriksa data dan berkas Anda",
       icon: CheckCircleIcon,
-      color: "bg-emerald-500",
+      color: "bg-[#15518a]",
       duration: "1-2 hari kerja"
     },
     {
       title: "10. Notifikasi Email",
       description: "Hasil verifikasi dikirim melalui email terdaftar",
       icon: EnvelopeIcon,
-      color: "bg-cyan-500",
+      color: "bg-[#1e3a8a]",
       duration: "Instan"
     },
   ];
@@ -83,7 +83,7 @@ export default function PanduanPPDB() {
         {/* Header Section */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Langkah <span className="text-blue-600">Pendaftaran</span> PPDB
+            Langkah <span className="text-[#15518a]">Pendaftaran</span> PPDB
           </h2>
           <p className="text-gray-600 text-lg max-w-3xl mx-auto">
             Ikuti panduan lengkap ini dari awal hingga akhir untuk mendaftar di SMK Taruna Bhakti
@@ -93,7 +93,7 @@ export default function PanduanPPDB() {
         {/* Steps Container with Background Pattern */}
         <div className="relative mb-16">
           {/* Decorative Background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50 rounded-3xl -z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-blue-100/30 rounded-3xl -z-10"></div>
           
           {/* Grid Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 p-8">
@@ -101,8 +101,8 @@ export default function PanduanPPDB() {
               <div key={index} className="relative">
                 {/* Connection Lines */}
                 {index < steps.length - 1 && index !== 4 && (
-                  <div className="hidden xl:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gradient-to-r from-blue-200 to-purple-200">
-                    <div className="absolute right-0 top-1/2 transform -translate-y-1/2 rotate-45 border-t-2 border-r-2 border-blue-300 w-2 h-2"></div>
+                  <div className="hidden xl:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gradient-to-r from-blue-200 to-blue-300">
+                    <div className="absolute right-0 top-1/2 transform -translate-y-1/2 rotate-45 border-t-2 border-r-2 border-[#15518a] w-2 h-2"></div>
                   </div>
                 )}
                 
@@ -111,7 +111,7 @@ export default function PanduanPPDB() {
                   bg-white rounded-2xl p-6 h-full
                   border border-gray-200
                   shadow-lg hover:shadow-2xl
-                  hover:border-blue-300
+                  hover:border-[#15518a]
                   transition-all duration-500
                   hover:-translate-y-2
                   group
@@ -129,7 +129,7 @@ export default function PanduanPPDB() {
                       w-8 h-8 rounded-full bg-gray-100
                       flex items-center justify-center
                       font-bold text-gray-700
-                      group-hover:bg-blue-100 group-hover:text-blue-700
+                      group-hover:bg-blue-100 group-hover:text-[#15518a]
                       transition-colors
                     ">
                       {index + 1}
@@ -158,7 +158,7 @@ export default function PanduanPPDB() {
                   </div>
 
                   {/* Hover Indicator */}
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#15518a] to-[#1e3a8a] rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
               </div>
             ))}
@@ -173,20 +173,20 @@ export default function PanduanPPDB() {
         </div>
 
         {/* Process Flow Info */}
-        <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 mb-12">
+        <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-2xl p-8 mb-12">
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">10</div>
+              <div className="text-4xl font-bold text-[#15518a] mb-2">10</div>
               <div className="text-gray-700 font-medium">Langkah Pendaftaran</div>
               <div className="text-gray-500 text-sm">Dari awal hingga akhir</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-purple-600 mb-2">24/7</div>
+              <div className="text-4xl font-bold text-[#1e3a8a] mb-2">24/7</div>
               <div className="text-gray-700 font-medium">Pendaftaran Online</div>
               <div className="text-gray-500 text-sm">Kapan saja, di mana saja</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-green-600 mb-2">48 Jam</div>
+              <div className="text-4xl font-bold text-[#15518a] mb-2">48 Jam</div>
               <div className="text-gray-700 font-medium">Proses Verifikasi</div>
               <div className="text-gray-500 text-sm">Maksimal waktu tunggu</div>
             </div>
@@ -202,10 +202,10 @@ export default function PanduanPPDB() {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <button className="
-                bg-gradient-to-r from-blue-600 to-purple-600
+                bg-gradient-to-r from-[#15518a] to-[#1e3a8a]
                 text-white px-10 py-4 rounded-xl
                 font-bold text-lg
-                hover:from-blue-700 hover:to-purple-700
+                hover:from-[#0f3d6b] hover:to-[#15518a]
                 transition-all duration-300
                 hover:scale-105
                 shadow-lg hover:shadow-xl
@@ -214,8 +214,6 @@ export default function PanduanPPDB() {
                 <span>Mulai Pendaftaran Sekarang</span>
                 <ArrowRightIcon className="w-5 h-5" />
               </button>
-              
-            
             </div>
 
             {/* Contact Info */}
@@ -226,13 +224,13 @@ export default function PanduanPPDB() {
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="text-center md:text-left">
                   <div className="text-gray-900 font-bold mb-2">📧 Email Support</div>
-                  <a href="mailto:ppdb@smktarunabhakti.sch.id" className="text-blue-600 hover:text-blue-800">
+                  <a href="mailto:ppdb@smktarunabhakti.sch.id" className="text-[#15518a] hover:text-[#0f3d6b]">
                     ppdb@smktarunabhakti.sch.id
                   </a>
                 </div>
                 <div className="text-center md:text-right">
                   <div className="text-gray-900 font-bold mb-2">📱 Telepon</div>
-                  <a href="tel:02112345678" className="text-blue-600 hover:text-blue-800">
+                  <a href="tel:02112345678" className="text-[#15518a] hover:text-[#0f3d6b]">
                     (021) 1234-5678
                   </a>
                 </div>

@@ -39,7 +39,7 @@ export default function FasilitasUnggulanSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-extrabold text-center mb-4 text-blue-800 tracking-tight"
+          className="text-4xl md:text-5xl font-extrabold text-center mb-4 text-[#15518a] tracking-tight"
         >
           Fasilitas Unggulan Kami 
         </motion.h2>
@@ -96,7 +96,7 @@ export default function FasilitasUnggulanSection() {
                 {/* Area Konten Bawah */}
                 <div className="p-6">
                   <div className="flex items-center space-x-3 mb-2">
-                    <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-700 transition duration-300">
+                    <h3 className="text-xl font-bold text-gray-900 group-hover:text-[#15518a] transition duration-300">
                       {item.title}
                     </h3>
                   </div>

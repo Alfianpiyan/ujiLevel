@@ -17,7 +17,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="bg-gradient-to-b from-white to-slate-50 overflow-hidden">
+    <section id="hero" className="bg-gradient-to-b from-white to-slate-50 overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 md:px-10 lg:px-20 py-10 md:py-28 grid md:grid-cols-2 items-center gap-14">
 
         {/* LEFT CONTENT */}

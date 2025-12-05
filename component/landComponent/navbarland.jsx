@@ -29,10 +29,26 @@ export default function Navbar() {
     };
   }, []);
 
+  // Function untuk smooth scroll
+  const handleSmoothScroll = (e, href) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    
+    const targetId = href.replace('#', '');
+    const targetElement = document.getElementById(targetId);
+    
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
+
   const navLinks = [
-    { label: "Beranda", href: "#beranda" },
-    { label: "PPDB", href: "#ppdb" },
-    { label: "Contact Us", href: "#contact" },
+    { label: "Beranda", href: "#hero" },
+    { label: "PPDB", href: "#panduan" },
+    { label: "Kontak Kami", href: "#faq" },
   ];
 
   return (
@@ -78,6 +94,7 @@ export default function Navbar() {
               <a
                 key={link.label}
                 href={link.href}
+                onClick={(e) => handleSmoothScroll(e, link.href)}
                 className="
                   font-semibold text-sm 
                   px-4 py-2 
@@ -86,6 +103,7 @@ export default function Navbar() {
                   hover:text-[#166dbf] 
                   hover:bg-[#166dbf]/10 
                   transition-all duration-300
+                  cursor-pointer
                 "
               >
                 {link.label}
@@ -96,7 +114,7 @@ export default function Navbar() {
           {/* Desktop Buttons */}
           <div className="hidden md:flex items-center gap-3">
             <Link
-              href="/masuk"
+              href="/login"
               className="
                 px-8 py-2 
                 text-sm font-medium 
@@ -112,7 +130,7 @@ export default function Navbar() {
               Masuk
             </Link>
             <Link
-              href="/daftar"
+              href="/register"
               className="
                 px-8 py-2 
                 text-sm font-medium 
@@ -136,9 +154,9 @@ export default function Navbar() {
             aria-label={isMenuOpen ? "Tutup menu" : "Buka menu"}
           >
             {isMenuOpen ? (
-              <X className="w-6 h-6 text-[#047857]" />
+              <X className="w-6 h-6 text-[#15518a]" />
             ) : (
-              <Menu className="w-6 h-6 text-[#047857]" />
+              <Menu className="w-6 h-6 text-[#15518a]" />
             )}
           </button>
         </div>
@@ -151,7 +169,7 @@ export default function Navbar() {
                 <a
                   key={link.label}
                   href={link.href}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => handleSmoothScroll(e, link.href)}
                   className="
                     text-[#15518a] 
                     font-medium 
@@ -160,6 +178,7 @@ export default function Navbar() {
                     rounded-lg 
                     hover:bg-[#15518a]/10 
                     transition-all duration-200
+                    cursor-pointer
                   "
                 >
                   {link.label}
@@ -169,7 +188,7 @@ export default function Navbar() {
               {/* Mobile Buttons */}
               <div className="flex flex-col gap-3 pt-4 border-t border-gray-200">
                 <Link
-                  href="/masuk"
+                  href="/login"
                   onClick={() => setIsMenuOpen(false)}
                   className="
                     w-full text-center
@@ -187,7 +206,7 @@ export default function Navbar() {
                   Masuk
                 </Link>
                 <Link
-                  href="/daftar"
+                  href="/register"
                   onClick={() => setIsMenuOpen(false)}
                   className="
                     w-full text-center
