@@ -51,16 +51,15 @@ export default function Homepage() {
       
       
       {/* Hero Section */}
-      <section id="hero" className="relative bg-gradient-to-br from-[#15518a] via-[#1e3a8a] to-[#0f3d6b] text-white overflow-hidden">
-        {/* Background Image with Overlay */}
+      <section id="hero" className="relative text-white overflow-hidden">
+        {/* Background Image with Dark Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920&q=80" 
+            src="/images/background.jpg" 
             alt="School Background" 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover brightness-75 " 
           />
-          {/* Dark Overlay for better text readability */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#15518a]/90 via-[#1e3a8a]/85 to-[#0f3d6b]/90"></div>
+       
         </div>
         
         {/* Decorative Elements */}
@@ -73,14 +72,14 @@ export default function Homepage() {
             {/* Badge */}
             <div className="inline-block mb-6">
               <span className="bg-white/20 backdrop-blur-sm text-white text-sm font-semibold px-5 py-2 rounded-full border border-white/30">
-                🎓 PPDB Tahun Ajaran 2025/2026
+                PPDB Tahun Ajaran 2025/2026
               </span>
             </div>
 
             {/* Main Title */}
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
               Raih Masa Depan Cerah<br />
-              Bersama <span className="text-blue-200">SMK Taruna Bhakti</span>
+              Bersama <span className="text-blue-300">SMK Taruna Bhakti</span>
             </h1>
             
             <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
@@ -90,18 +89,13 @@ export default function Homepage() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <a
-                href="/register"
+                href="/user/ppdb"
                 className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#15518a] rounded-xl font-bold text-lg hover:bg-gray-100 transition-all shadow-2xl hover:shadow-3xl hover:scale-105"
               >
                 Daftar Sekarang
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
-              <a
-                href="#panduan"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent border-2 border-white text-white rounded-xl font-semibold text-lg hover:bg-white/10 transition-all"
-              >
-                Panduan Pendaftaran
-              </a>
+              
             </div>
 
             {/* Stats */}
@@ -110,7 +104,7 @@ export default function Homepage() {
                 const Icon = feature.icon;
                 return (
                   <div key={index} className="flex items-center gap-3 bg-white/10 backdrop-blur-sm px-5 py-3 rounded-lg border border-white/20">
-                    <Icon className="w-6 h-6 text-blue-200" />
+                    <Icon className="w-6 h-6 text-blue-300" />
                     <div className="text-left">
                       <p className="text-xl font-bold">{feature.title}</p>
                       <p className="text-xs text-blue-200">{feature.desc}</p>
@@ -182,18 +176,13 @@ export default function Homepage() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <a
-                href="/register"
+                href="/user/ppdb"
                 className="group inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white text-[#15518a] rounded-lg font-semibold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl w-full sm:w-auto"
               >
                 Daftar Sekarang
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
-              <a
-                href="#panduan"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-transparent border-2 border-white text-white rounded-lg font-semibold hover:bg-white/10 transition-all w-full sm:w-auto"
-              >
-                Info Lengkap
-              </a>
+              
             </div>
 
             <p className="text-center text-blue-100 text-sm mt-6 flex items-center justify-center gap-4 flex-wrap">
@@ -241,15 +230,7 @@ export default function Homepage() {
             ))}
           </div>
 
-          <div className="text-center mt-10">
-            <a
-              href="#panduan"
-              className="inline-flex items-center gap-2 text-[#15518a] font-semibold hover:text-[#0f3d6b] transition-colors"
-            >
-              Lihat Detail Program
-              <ArrowRight className="w-4 h-4" />
-            </a>
-          </div>
+          
         </div>
       </section>
 
@@ -278,15 +259,7 @@ export default function Homepage() {
             ))}
           </div>
 
-          <div className="text-center mt-8">
-            <a
-              href="#faq"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#15518a] text-white rounded-lg font-semibold hover:bg-[#0f3d6b] transition-all"
-            >
-              Lihat Semua FAQ
-              <ArrowRight className="w-4 h-4" />
-            </a>
-          </div>
+          
         </div>
       </section>
 

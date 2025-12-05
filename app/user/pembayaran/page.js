@@ -1,4 +1,4 @@
-import RiwayatPembayaran from "@/component/userComponent/pembayaran";
+import RiwayatPembayaran from "@/component/userComponent/data-user";
 
 export default function PaymentPage() {
     return(
