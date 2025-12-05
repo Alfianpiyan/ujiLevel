@@ -16,8 +16,8 @@ export async function GET() {
         id,
         nama_lengkap,
         nisn,
-        status_pembayaran
-      FROM ppdb
+        status_verifikasi
+      FROM pendaftaran
       ORDER BY id DESC
     `);
 

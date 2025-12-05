@@ -64,7 +64,7 @@ export async function POST(req) {
 
     const conn = await connection();
 
-    const [countRows] = await conn.execute("SELECT COUNT(*) AS total FROM pembayran");
+    const [countRows] = await conn.execute("SELECT COUNT(*) AS total FROM pendaftaran");
     const idPendaftar = String(countRows[0].total + 1).padStart(3, "0");
 
     const year = new Date().getFullYear();
@@ -75,7 +75,7 @@ export async function POST(req) {
     const nomor_pendaftaran = `PPD-${tahunAjaran}-${idPendaftar}`;
 
     await conn.execute(
-      `INSERT INTO pembayaran 
+      `INSERT INTO pendaftaran 
       (nomor_pendaftaran, nama_lengkap, nisn, tanggal_lahir, jurusan_id, user_id,
       ijazah, akta, kk, foto, rapor, skl, gelombang, bukti_pembayaran,
       status_pembayaran, status_verifikasi, tanggal_upload)

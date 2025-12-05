@@ -46,14 +46,14 @@ export default function DataTable() {
               <td className="p-3 border">{item.nisn}</td>
               <td
                 className={`p-3 border font-semibold ${
-                  item.status_pembayaran === "verifikasi"
+                  item.status_verifikasi === "verifikasi"
                     ? "text-green-600"
-                    : item.status_pembayaran === "tolak"
+                    : item.status_verifikasi === "tolak"
                     ? "text-red-600"
                     : "text-yellow-600"
                 }`}
               >
-                {item.status_pembayaran || "Pending"}
+                {item.status_verifikasi || "Pending"}
               </td>
             </tr>
           ))}

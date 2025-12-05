@@ -94,12 +94,12 @@ export async function getDashboardStats() {
 
     // Lulus Verifikasi - berdasarkan status_pembayaran = 'verifikasi'
     const [lulusVerifikasi] = await conn.execute(
-      `SELECT COUNT(*) as count FROM pendaftaran WHERE status_pembayaran = 'verifikasi'`
+      `SELECT COUNT(*) as count FROM pendaftaran WHERE status_verifikasi = 'verifikasi'`
     );
 
     // Belum Diverifikasi - status_pembayaran = 'pending'
     const [belumDiverifikasi] = await conn.execute(
-      `SELECT COUNT(*) as count FROM pendaftaran WHERE status_pembayaran = 'pending'`
+      `SELECT COUNT(*) as count FROM pendaftaran WHERE status_verifikasi = 'pending'`
     );
 
     return {

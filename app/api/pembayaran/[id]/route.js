@@ -15,7 +15,7 @@ export async function PUT(req, context) {
 
     const conn = await connection();
     await conn.execute(
-      `UPDATE pembayaran SET status_verifikasi = ? WHERE id = ?`,
+      `UPDATE pendaftaran SET status_verifikasi = ? WHERE id = ?`,
       [status_verifikasi, id]
     );
 

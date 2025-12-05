@@ -49,11 +49,23 @@ export default function Homepage() {
   return (
     <div className="min-h-screen bg-white">
       
+      
       {/* Hero Section */}
       <section id="hero" className="relative bg-gradient-to-br from-[#15518a] via-[#1e3a8a] to-[#0f3d6b] text-white overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920&q=80" 
+            alt="School Background" 
+            className="w-full h-full object-cover"
+          />
+          {/* Dark Overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#15518a]/90 via-[#1e3a8a]/85 to-[#0f3d6b]/90"></div>
+        </div>
+        
         {/* Decorative Elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl z-0"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl z-0"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
@@ -84,7 +96,6 @@ export default function Homepage() {
                 Daftar Sekarang
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
-              
               <a
                 href="#panduan"
                 className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent border-2 border-white text-white rounded-xl font-semibold text-lg hover:bg-white/10 transition-all"
@@ -177,7 +188,6 @@ export default function Homepage() {
                 Daftar Sekarang
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
-              
               <a
                 href="#panduan"
                 className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-transparent border-2 border-white text-white rounded-lg font-semibold hover:bg-white/10 transition-all w-full sm:w-auto"
